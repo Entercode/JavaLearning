@@ -1,0 +1,31 @@
+package com.github.entercode;
+
+import java.awt.Dimension;
+import java.awt.Image;
+import java.io.File;
+
+import javax.imageio.ImageIO;
+import javax.swing.JPanel;
+
+public class MainWindow extends JPanel {
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	Image img;
+	
+	public MainWindow() {
+		setPreferredSize(new Dimension(640,560));
+        // 画像ファイルの読み込み
+        try {
+            img = ImageIO.read(new File("test.jpg"));
+        } catch (Exception e) {
+            System.out.println(e);
+            System.exit(0);
+        }
+	}
+	
+	
+
+}

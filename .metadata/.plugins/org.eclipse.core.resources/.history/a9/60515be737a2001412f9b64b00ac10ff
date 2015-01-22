@@ -1,0 +1,16 @@
+package com.github.entercode;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+
+public class ImagePracitice {
+
+	public static void main(String[] args) {
+		
+		File file = new File("test.png");
+		
+		BufferedImage img = new BufferedImage(file);
+		
+	}
+
+}
