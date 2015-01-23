@@ -1,0 +1,42 @@
+package com.github.entercode;
+
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+
+public class ImagePracitice {
+
+	public static void main(String[] args) {
+		
+		File file = new File("test.png");
+		
+		try {
+			BufferedImage img = ImageIO.read(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		JFrame frame = new JFrame();
+		frame.setSize(640, 480);
+		frame.setVisible(true);
+		MainWindow window = new MainWindow();
+		
+		
+		for (int i = 0; i < 3; i++) {
+			System.out.println("[Count] " + i);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		frame.add(window);
+		window.setVisible(true);
+		frame.setVisible(true);
+	}
+
+}
