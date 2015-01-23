@@ -14,7 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 //import javax.swing.Timer;
 
-public class GameWindow extends JPanel {
+public class GameWindow extends JPanel implements ActionListener {
 	
 	/**
 	 * 
@@ -54,6 +54,22 @@ public class GameWindow extends JPanel {
 		super.paintComponent(g);
 		drawMan(g);
 	}
+
+	
+	// Update method
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+		pos.x += 1;
+		pos.y += 1;
+		
+		if (pos.x > 640 || pos.y > 320) {
+			pos.x = 0;
+			pos.y = 0;
+		}
+		
+		repaint();
+	}
 	
 	private void loadImage() {
 
@@ -68,18 +84,9 @@ public class GameWindow extends JPanel {
 	
 	private class ScheduledTask extends TimerTask {
 
-		// Update
 		@Override
 		public void run() {
-			pos.x += 1;
-			pos.y += 1;
 			
-			if (pos.x > 640 || pos.y > 320) {
-				pos.x = 0;
-				pos.y = 0;
-			}
-			
-			repaint();
 		}
 		
 	}
