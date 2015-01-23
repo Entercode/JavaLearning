@@ -11,8 +11,6 @@ import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
-import com.github.entercode.util.UtilityTimer;
-
 public class ImagePracitice {
 	
 	Timer timer;
@@ -22,7 +20,12 @@ public class ImagePracitice {
 		EventQueue.invokeLater(new Runnable(){
 			@Override
 			public void run() {
-				JFrame ex = new UtilityTimer();
+				
+				JFrame ex = new JFrame();
+				ex.add(new GameWindow());
+				ex.setSize(640, 480);
+				ex.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				ex.pack();
 				ex.setVisible(true);
 			}
 		});

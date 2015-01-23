@@ -1,50 +1,38 @@
 package com.github.entercode;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-//import javax.swing.Timer;
 
-public class GameWindow extends JPanel {
+public class GameWindow extends JPanel implements Runnable {
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private Timer timer;
 	private Point pos;
 	private Image man;
-	private int INITIAL_DELAY = 100;
-	private int PERIOD_INTERVAL = 25;
+	private Thread animator;
+	private boolean skip = false;
+	
+	private int DELAY = 25;
+	private long beforeTime, timeDiff, frameDiff;
 	
 	public GameWindow() {
 	
 		pos = new Point(30, 30);
-//		setBackground(Color.BLACK);
+		setBackground(Color.BLACK);
 		setPreferredSize(new Dimension(640, 320));
 		setDoubleBuffered(true);
 		setVisible(true);
 		
 		loadImage();
-		
-/*		
- * Old Method javax.swing.Timer
-		timer = new Timer(25, this);
-		timer.start();
-*/
-		
-		timer = new Timer();
-		timer.scheduleAtFixedRate(new ScheduledTask(), INITIAL_DELAY, PERIOD_INTERVAL);
-		
 	}
 	
 	
@@ -66,7 +54,7 @@ public class GameWindow extends JPanel {
         Toolkit.getDefaultToolkit().sync();
 	}
 	
-	private class ScheduledTask extends TimerTask {
+	/*private class ScheduledTask extends TimerTask {
 
 		// Update
 		@Override
@@ -82,5 +70,72 @@ public class GameWindow extends JPanel {
 			repaint();
 		}
 		
+	}*/
+	
+	// Update
+	private void update() {
+		pos.x += 1;
+		pos.y += 1;
+		
+		if (pos.x > 640 || pos.y > 320) {
+			pos.x = 0;
+			pos.y = 0;
+		}
+		
+	}
+	
+	@Override
+	public void addNotify() {
+		System.out.println("[Notify] ");
+		super.addNotify();
+		
+		animator = new Thread(this);
+		animator.start();
+		
+	}
+
+	@Override
+	public void run() {
+		
+		
+		beforeTime = System.currentTimeMillis();
+		
+		while (true) {
+			
+			// レンダリング
+			if (skip) {
+				System.out.println("[Render] skipped");
+			}
+			else {
+				// レンダー
+				repaint();
+			}
+				
+				
+			// アップデート
+			update();
+			
+			// 前の時刻からの時間差（前の処理にかかった時間）
+			timeDiff = System.currentTimeMillis() - beforeTime;
+			frameDiff = DELAY - timeDiff;
+			
+			// フレーム内で処理が完了していない
+			if (frameDiff < 0) {
+				skip = true;
+			}
+			// フレーム内で処理が完了
+			else {
+				skip = false;
+				// 処理後に余った時間の間スリープ
+				try {
+					Thread.sleep(frameDiff);
+				} catch (InterruptedException e) {
+					System.out.println("Interrupted: " + e.getMessage());
+				}
+			}
+			
+			// 全処理完了時刻
+			beforeTime = System.currentTimeMillis();
+		}
 	}
 }
