@@ -1,6 +1,13 @@
 package com.github.entercode;
 
+import java.awt.Color;
+import java.awt.Event;
 import java.awt.EventQueue;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
@@ -23,11 +30,14 @@ public class ImagePracitice {
 			}
 		});
 		
-		JFrame iv = new JFrame();
-		iv.setBounds(0, 480, 320, 320);
-		iv.setVisible(true);
-		iv.add(new ImageView());
-//		iv.pack();
+		
+//		GameWindow gw = new GameWindow();
+//		
+//		JFrame frame = new JFrame();
+//		frame.setBackground(Color.lightGray);
+//		frame.setSize(640, 480);
+//		frame.add(gw);
+//		frame.setVisible(true);
 		
 	}
 

@@ -1,0 +1,14 @@
+package com.github.entercode;
+
+import javax.swing.JPanel;
+
+public class ImageView extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	
+
+}

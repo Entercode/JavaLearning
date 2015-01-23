@@ -1,0 +1,27 @@
+package com.github.entercode;
+
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
+
+import javax.swing.JPanel;
+
+public class ImageView extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	
+	private BufferedImage img;
+	
+	public ImageView() {
+		
+	}
+	
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		
+		g.drawImage(img, 100, 100, )
+	}
+}

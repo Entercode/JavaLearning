@@ -24,10 +24,8 @@ public class ImagePracitice {
 		});
 		
 		JFrame iv = new JFrame();
-		iv.setBounds(0, 480, 320, 320);
+		iv.setBounds(300, 480, 320, 320);
 		iv.setVisible(true);
-		iv.add(new ImageView());
-//		iv.pack();
 		
 	}
 
