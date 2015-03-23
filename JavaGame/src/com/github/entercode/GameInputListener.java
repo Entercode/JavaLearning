@@ -25,20 +25,26 @@ public void keyTyped(KeyEvent e) {
 public void keyPressed(KeyEvent e) {
 
 
+	Player p = (Player) GameRegister.EntityRegister.get(0);
 	switch(e.getKeyCode()) {
 		case KeyEvent.VK_LEFT:
 			
-			Player p = (Player) GameRegister.EntityRegister.get(0);
-			p.moveRight();
+			p.moveLeft();
 
 			break;
 		case KeyEvent.VK_RIGHT:
+			
+			p.moveRight();
 
 			break;
 		case KeyEvent.VK_UP:
+			
+			p.moveUp();
 
 			break;
 		case KeyEvent.VK_DOWN:
+			
+			p.moveDown();
 
 			break;
 		case KeyEvent.VK_SHIFT:

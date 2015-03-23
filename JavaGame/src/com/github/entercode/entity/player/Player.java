@@ -24,7 +24,7 @@ public class Player extends EntityPlayer {
 
 	@Override
 	public void moveLeft() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		this.pos.x -= 10;
 	}
 
 	@Override
@@ -34,11 +34,11 @@ public class Player extends EntityPlayer {
 
 	@Override
 	public void moveUp() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		this.pos.y -= 10;
 	}
 
 	@Override
 	public void moveDown() {
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+		this.pos.y += 10;
 	}
 }

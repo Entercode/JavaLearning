@@ -10,6 +10,7 @@ import java.awt.Point;
 import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class GameFrameEngine extends JPanel implements Runnable {
