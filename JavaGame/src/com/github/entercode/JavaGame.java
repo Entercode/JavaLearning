@@ -22,12 +22,15 @@ public class JavaGame {
 			@Override
 			public void run() {
 				
+				GameRegister.load();
+				
 				JFrame ex = new JFrame();
-				ex.add(new com.github.entercode.GameFrameEngine());
+				ex.add(new GameFrameEngine());
 				ex.setSize(640, 480);
 				ex.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				ex.pack();
 				ex.setVisible(true);
+                                ex.addKeyListener(new GameInputListener());
 			}
 		});
     }
