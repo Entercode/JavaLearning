@@ -3,7 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gmail.entercode;
+package com.github.entercode;
+
+import java.awt.EventQueue;
+import javax.swing.JFrame;
 
 /**
  *
@@ -15,7 +18,18 @@ public class JavaGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        EventQueue.invokeLater(new Runnable(){
+			@Override
+			public void run() {
+				
+				JFrame ex = new JFrame();
+				ex.add(new com.github.entercode.GameFrameEngine());
+				ex.setSize(640, 480);
+				ex.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				ex.pack();
+				ex.setVisible(true);
+			}
+		});
     }
     
 }
