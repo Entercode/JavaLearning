@@ -5,6 +5,7 @@
  */
 package com.github.entercode;
 
+import java.awt.Color;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 
@@ -18,7 +19,22 @@ public class JavaGame {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable(){
+		
+		{
+			JFrame app = new JFrame("GameFrameEngineV2");
+			GameFrameEngineV2 gf = new GameFrameEngineV2(640, 480, Color.BLACK);
+			app.setIgnoreRepaint(true);
+			app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			app.add(gf);
+			
+			app.pack();
+			app.setVisible(true);
+			gf.init();
+			gf.run();
+		}
+		
+		
+        /*EventQueue.invokeLater(new Runnable(){
 			@Override
 			public void run() {
 				
@@ -32,7 +48,7 @@ public class JavaGame {
 				ex.setVisible(true);
                                 ex.addKeyListener(new GameInputListener());
 			}
-		});
+		});*/
     }
     
 }

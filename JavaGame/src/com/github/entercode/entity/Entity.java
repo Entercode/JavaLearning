@@ -5,7 +5,8 @@
  */
 package com.github.entercode.entity;
 
-import java.awt.Graphics;
+import com.github.entercode.util.Log;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Point;
 import java.awt.image.ImageObserver;
@@ -50,10 +51,11 @@ public abstract class Entity {
 		this.height = height;
 		this.pos = pos;
 		loadImage(texture);
+		Log.info("loaded " + name);
 	}
 	
-	public void draw(Graphics g, ImageObserver io) {
-		g.drawImage(texture, pos.x, pos.y, width, height, io);
+	public void draw(Graphics2D g2d, ImageObserver io) {
+		g2d.drawImage(texture, pos.x, pos.y, width, height, io);
 	}
 	
 	private void loadImage(String texture) {
