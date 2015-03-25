@@ -96,16 +96,13 @@ public class GameFrameEngineV2 extends Canvas {
 		// Input Listener
 		Log.info("InputListener", "init");
 		this.addKeyListener(new GameInputListener());
-		
-		
-		
 	}
 	
 	// Render loop
 	public void render() {
-		for(Entity e : GameRegister.EntityRegister) {
-			e.draw(g2d, null);
-		}
+//		for(Entity e : GameRegister.EntityRegister) {
+//			e.draw(g2d, null);
+//		}
 		
 //		try {
 //			g2d.drawImage(ImageIO.read(new File("resource/texture/entity/player/test.png")), 100, 100, null);
