@@ -11,8 +11,8 @@ package com.github.entercode.tile;
  */
 public class DirtTile extends Tile {
 
-	public DirtTile(int id) {
-		super(id, "Dirt");
+	public DirtTile(int id, String name) {
+		super(id, name);
 	}
 
 	@Override

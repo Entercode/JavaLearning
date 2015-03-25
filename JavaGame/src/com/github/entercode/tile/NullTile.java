@@ -13,8 +13,8 @@ import java.awt.Graphics2D;
  */
 public class NullTile extends Tile {
 
-	public NullTile(int id) {
-		super(id, "null");
+	public NullTile(int id, String name) {
+		super(id, name);
 	}
 	
 	@Override

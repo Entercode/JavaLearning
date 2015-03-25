@@ -11,8 +11,8 @@ package com.github.entercode.tile;
  */
 public class IronFenceTile extends Tile {
 
-	public IronFenceTile(int id) {
-		super(id, "IronFence");
+	public IronFenceTile(int id, String name) {
+		super(id, name);
 	}
 
 	@Override

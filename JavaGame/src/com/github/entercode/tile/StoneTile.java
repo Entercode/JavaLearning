@@ -9,15 +9,15 @@ package com.github.entercode.tile;
  *
  * @author entercode
  */
-public class OreTile extends Tile {
+public class StoneTile extends Tile {
 
-	public OreTile(int id, String name) {
+	public StoneTile(int id, String name) {
 		super(id, name);
 	}
 
 	@Override
 	public void update() {
-	
+		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 	
 }

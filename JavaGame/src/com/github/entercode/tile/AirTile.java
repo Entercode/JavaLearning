@@ -11,8 +11,8 @@ package com.github.entercode.tile;
  */
 public class AirTile extends Tile {
 
-	public AirTile(int id) {
-		super(id, "Air");
+	public AirTile(int id, String name) {
+		super(id, name);
 	}
 
 	@Override
