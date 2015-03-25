@@ -5,9 +5,6 @@
  */
 package com.github.entercode;
 
-
-import com.github.entercode.entity.player.Player;
-import com.github.entercode.util.Log;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -16,55 +13,52 @@ import java.awt.event.KeyListener;
  * @author entercode
  */
 public class GameInputListener implements KeyListener {
+	
+	public Key up		= new Key();
+	public Key down		= new Key();
+	public Key left		= new Key();
+	public Key right	= new Key();
+	public Key space	= new Key();
+	public Key shift	= new Key();
+	
+	
+	
 
-@Override
-public void keyTyped(KeyEvent e) {
-}
-
-@Override
-public void keyPressed(KeyEvent e) {
-
-
-	Player p = (Player) GameRegister.EntityRegister.get(0);
-	switch(e.getKeyCode()) {
-		case KeyEvent.VK_LEFT:
-			
-			p.moveLeft();
-
-			break;
-		case KeyEvent.VK_RIGHT:
-			
-			p.moveRight();
-
-			break;
-		case KeyEvent.VK_UP:
-			
-			p.moveUp();
-
-			break;
-		case KeyEvent.VK_DOWN:
-			
-			p.moveDown();
-
-			break;
-		case KeyEvent.VK_SHIFT:
-
-			break;
-		case KeyEvent.VK_SPACE:
-
-			break;
-		case KeyEvent.VK_ESCAPE:
-
-		break;
-		default:
-			break;
-
+	@Override
+	public void keyTyped(KeyEvent e) {
 	}
-}
 
-@Override
-public void keyReleased(KeyEvent e) {
+	@Override
+	public void keyPressed(KeyEvent e) {
+		toggleKey(e.getKeyCode(), true);
+	}
 
-}
+	@Override
+	public void keyReleased(KeyEvent e) {
+		toggleKey(e.getKeyCode(), false);
+	}
+	
+	public void toggleKey(int keycode, boolean pressed) {
+		switch(keycode) {
+			case KeyEvent.VK_UP:
+				up.toggle(pressed);
+				break;
+			case KeyEvent.VK_DOWN:
+				down.toggle(pressed);
+				break;
+			case KeyEvent.VK_LEFT:
+				left.toggle(pressed);
+				break;
+			case KeyEvent.VK_RIGHT:
+				right.toggle(pressed);
+				break;
+			case KeyEvent.VK_SPACE:
+				space.toggle(pressed);
+				break;
+			case KeyEvent.VK_SHIFT:
+				shift.toggle(pressed);
+				break;
+		}
+	}
 
 }
