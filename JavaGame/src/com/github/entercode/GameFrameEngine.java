@@ -1,5 +1,7 @@
 package com.github.entercode;
 
+import com.github.entercode.entity.Entity;
+import com.github.entercode.util.Log;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -8,6 +10,7 @@ import java.awt.Point;
 import java.awt.Toolkit;
 
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class GameFrameEngine extends JPanel implements Runnable {
@@ -25,16 +28,24 @@ public class GameFrameEngine extends JPanel implements Runnable {
 	private long beforeTime, timeDiff, frameDiff;
 	
 	public GameFrameEngine() {
-	
+		init();
+	}
+
+	/*
+	 * init
+	 */
+	private void init() {
+		Log.info("init");
+		//this.addKeyListener(new GameInputListener());
 		pos = new Point(30, 30);
 		setBackground(Color.BLACK);
 		setPreferredSize(new Dimension(640, 320));
 		setDoubleBuffered(true);
 		setVisible(true);
-		
+
 		loadImage();
 	}
-	
+		
 	/*
 	 * update処理
 	 */
@@ -55,20 +66,24 @@ public class GameFrameEngine extends JPanel implements Runnable {
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		drawMan(g);
+		// drawMan(g);
+		
+		for(Entity e : GameRegister.EntityRegister) {
+			//e.draw(g, this);
+		}
 	}
 	
 	
 	
 	private void loadImage() {
 
-        ImageIcon ii = new ImageIcon("test.png");
-        man = ii.getImage();
-    }
+		ImageIcon ii = new ImageIcon("test.png");
+		man = ii.getImage();
+	}
 	
 	private void drawMan(Graphics g) {
 		g.drawImage(man, pos.x, pos.y, this);
-        Toolkit.getDefaultToolkit().sync();
+		Toolkit.getDefaultToolkit().sync();
 	}
 	
 	@Override

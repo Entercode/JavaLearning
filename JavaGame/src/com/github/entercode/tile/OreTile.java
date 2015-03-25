@@ -3,19 +3,21 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.gmail.entercode;
+package com.github.entercode.tile;
 
 /**
  *
  * @author entercode
  */
-public class JavaGame {
+public class OreTile extends Tile {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    }
-    
+	public OreTile(int id, String name) {
+		super(id, name);
+	}
+
+	@Override
+	public void update() {
+	
+	}
+	
 }

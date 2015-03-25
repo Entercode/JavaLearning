@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 /JavaGame/nbproject/private/
 =======
@@ -6,3 +7,7 @@
 /JavaGame/GFEMapBuilder/nbproject/private/
 /JavaGame/GFEMapBuilder/build/
 >>>>>>> Stashed changes
+=======
+/JavaGame/nbproject/private/
+/JavaGame/build/
+>>>>>>> feature/JavaGame
