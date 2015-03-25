@@ -5,6 +5,7 @@
  */
 package com.github.entercode.tile;
 
+import com.github.entercode.util.Log;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.File;
@@ -36,7 +37,6 @@ public abstract class Tile {
 	
 	public void draw(Graphics2D g2d, int x, int y, int ox, int oy) {
 		g2d.drawImage(texture, 32 * x + ox, 32 * y + oy, null);
-		System.out.printf("[xy] %2d, %2d\n", 32 * x + ox, 32 * y + oy);
 	}
 	
 	public abstract void update();
