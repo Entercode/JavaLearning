@@ -5,13 +5,17 @@
  */
 package com.github.entercode.area;
 
+import com.github.entercode.GameRegister;
 import com.github.entercode.entity.*;
 import com.github.entercode.tile.*;
 import com.github.entercode.util.Log;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -31,23 +35,24 @@ public abstract class Area {
 	public Image		texture;
 	public BufferedImage backTile;
 	public BufferedImage frontTile;
+	
+	public ArrayList<Integer> AreaDataBack = new ArrayList<>();
+	public ArrayList<Integer> AreaDataMiddle = new ArrayList<>();
+	public ArrayList<Integer> AreaDataFront = new ArrayList<>();
 
 	public ArrayList<Entity> entityRegister = new ArrayList<>();
 	public ArrayList<Tile> backTileRegister = new ArrayList<>();
+	public ArrayList<Tile> middleTileRegister = new ArrayList<>();
 	public ArrayList<Tile> frontTileRegister = new ArrayList<>();
 	
-	public Area(int id, String name, int width, int height) {
-		
-		init(id, name, width, height);
+	public Area(int id, String name) {
+		init(id, name);
 	}
 	
-	private void init(int id, String name, int width, int height) {
+	private void init(int id, String name) {
 		this.id = id;
 		this.name = name;
-		this.width = width;
-		this.height = height;
-		this.backTile = new BufferedImage(width * 32, height * 32, BufferedImage.TYPE_INT_ARGB);
-		this.frontTile = new BufferedImage(width * 32, height * 32, BufferedImage.TYPE_INT_ARGB);
+		
 		
 		load();
 	}
@@ -69,42 +74,108 @@ public abstract class Area {
 	
 	
 	private void load() {
+		loadAreaData();
+		this.backTile = new BufferedImage(width * 32, height * 32, BufferedImage.TYPE_INT_ARGB);
+		this.frontTile = new BufferedImage(width * 32, height * 32, BufferedImage.TYPE_INT_ARGB);
 		loadBackground();
-		loadBackTile();
-		loadFrontTile();
+		drawBackTile();
+		drawFrontTile();
 	}
-		
-	private void loadBackTile() {
-		
+	
+	private void drawBackTile() {
 		Graphics2D g2d = backTile.createGraphics();
 		
-		// Tile
-		int row, col;
-		int cnt = 0;
-		for(Tile t : backTileRegister) {
-			col = cnt % this.width;
-			row = cnt / this.width;
-			t.draw(g2d, col, row, 0, 0);
+		int cnt = 0, row, col;
+		for(int n : AreaDataBack) {
+			col = cnt % width;
+			row = cnt / width;
+			
+			Tile t = GameRegister.TileRegister.get(n);
+			if(t == null) {
+				System.out.printf("id: %4d is unknown", n);
+			} else {
+				t.draw(g2d, col, row, 0, 0);
+			}
+			
+			cnt++;
+		}	
+	}
+	
+	private void drawFrontTile() {
+		Graphics2D g2d = frontTile.createGraphics();
+		
+		int cnt = 0, row, col;
+		for(int n : AreaDataFront) {
+			col = cnt % width;
+			row = cnt / width;
+			
+			Tile t = GameRegister.TileRegister.get(n);
+			if(t == null) {
+				System.out.printf("id: %4d is unknown", n);
+			} else {
+				t.draw(g2d, col, row, 0, 0);
+			}
+			
 			cnt++;
 		}
 	}
 	
-	private void loadFrontTile() {
+	private void loadAreaData() {
+		File f = new File("res/area/" + name.toLowerCase());
 		
-		Graphics2D g2d = frontTile.createGraphics();
-		
-		// Tile
-		int row, col;
+		String line;
 		int cnt = 0;
-		for(Tile t : frontTileRegister) {
-			col = cnt % this.width;
-			row = cnt / this.width;
-			t.draw(g2d, col, row, 0, 0);
-			cnt++;
+		
+		try {
+			
+			BufferedReader br = new BufferedReader(new FileReader(f));
+			
+			while((line = br.readLine()) != null) {
+				switch(cnt) {
+					case 0:
+						String[] strs = line.split(" ");
+						this.width = Integer.parseInt(strs[0]);
+						this.height = Integer.parseInt(strs[1]);
+						break;
+					case 1:
+						break;
+					case 2:
+						break;
+						
+					// Area Data
+					case 3:			// back
+						
+						for(String str : line.split(" ")) {
+							AreaDataBack.add(Integer.parseInt(str));
+						}
+						break;
+					case 4:			// middle
+						for(String str : line.split(" ")) {
+							AreaDataMiddle.add(Integer.parseInt(str));
+						}
+						break;
+					case 5:			// front
+						for(String str : line.split(" ")) {
+							AreaDataFront.add(Integer.parseInt(str));
+						}
+						break;
+					default:
+						Log.error("Not area file?");
+						break;
+					
+				}
+				cnt++;
+			}
+			
+		} catch (FileNotFoundException ex) {
+			Logger.getLogger(Area.class.getName()).log(Level.SEVERE, null, ex);
+		} catch (IOException ex) {
+			Logger.getLogger(Area.class.getName()).log(Level.SEVERE, null, ex);
 		}
 		
 		
-	}	
+		
+	}
 		
 	private void loadBackground() {
 		
@@ -113,36 +184,5 @@ public abstract class Area {
 		} catch (IOException ex) {
 			Logger.getLogger(Tile.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		
-		// debug
-		backTileRegister.add(new AirTile(0));
-		backTileRegister.add(new AirTile(0));
-		backTileRegister.add(new AirTile(0));
-		backTileRegister.add(new OreTile(0));
-		backTileRegister.add(new AirTile(0));
-		backTileRegister.add(new AirTile(0));
-		backTileRegister.add(new OreTile(0));
-		backTileRegister.add(new OreTile(0));
-		backTileRegister.add(new DirtTile(0));
-		backTileRegister.add(new DirtTile(0));
-		backTileRegister.add(new DirtTile(0));
-		backTileRegister.add(new DirtTile(0));
-		
-		frontTileRegister.add(new NullTile(0));
-		frontTileRegister.add(new IronFenceTile(0));
-		frontTileRegister.add(new NullTile(0));
-		frontTileRegister.add(new NullTile(0));
-		frontTileRegister.add(new NullTile(0));
-		frontTileRegister.add(new IronFenceTile(0));
-		frontTileRegister.add(new NullTile(0));
-		frontTileRegister.add(new NullTile(0));
-		frontTileRegister.add(new NullTile(0));
-		frontTileRegister.add(new NullTile(0));
-		frontTileRegister.add(new NullTile(0));
-		frontTileRegister.add(new NullTile(0));
 	}
-	
-	
-	
-	
 }
