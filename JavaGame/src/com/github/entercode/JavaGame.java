@@ -22,7 +22,7 @@ public class JavaGame {
 		
 		{
 			JFrame app = new JFrame("GameFrameEngineV2");
-			GameFrameEngineV2 gf = new GameFrameEngineV2(128, 96, Color.BLACK);
+			GameFrameEngineV2 gf = new GameFrameEngineV2(1024, 768, Color.BLACK);
 			app.setIgnoreRepaint(true);
 			app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			app.add(gf);
