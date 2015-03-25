@@ -53,8 +53,9 @@ public class GameFrameEngineV2 extends Canvas {
 	private Graphics2D	g2d			= null;
 	
 	// Frag
-	boolean isRunning	= true;
-	boolean isDebug		= true;
+	boolean running		= true;
+	boolean debug		= true;
+	boolean loading		= true;
 	
 	
 	public GameFrameEngineV2(int width, int height, Color bgColor) {
@@ -96,6 +97,8 @@ public class GameFrameEngineV2 extends Canvas {
 		Log.info("InputListener", "init");
 		this.addKeyListener(new GameInputListener());
 		
+		
+		
 	}
 	
 	// Render loop
@@ -111,13 +114,16 @@ public class GameFrameEngineV2 extends Canvas {
 //		}
 		g2d.setColor(Color.cyan);
 		g2d.fillRect(0, 0, 10, 10);
-
+		
+//		if(loadarea) {
+			GameRegister.currentArea.draw(g2d);
+			loading = false;
+//		}
 	}
 	
 	// Update loop
 	public void update() {
-		GameRegister.EntityRegister.get(0).pos.x += 1;
-		GameRegister.EntityRegister.get(0).pos.y += 1;
+		
 	}
 	
 	public void debugRender() {
@@ -129,7 +135,7 @@ public class GameFrameEngineV2 extends Canvas {
 	
 	// Engine loop
 	public void run() {
-		while(isRunning) {
+		while(running) {
 			
 			try {
 				// FPS
@@ -156,7 +162,7 @@ public class GameFrameEngineV2 extends Canvas {
 				render();
 				
 				// Rendering debug info
-				if(isDebug) {
+				if(debug) {
 					debugRender();
 				}
 				

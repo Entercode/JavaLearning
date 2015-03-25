@@ -69,7 +69,7 @@ public class GameFrameEngine extends JPanel implements Runnable {
 		// drawMan(g);
 		
 		for(Entity e : GameRegister.EntityRegister) {
-			e.draw(g, this);
+			//e.draw(g, this);
 		}
 	}
 	

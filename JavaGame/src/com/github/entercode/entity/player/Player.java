@@ -5,40 +5,21 @@
  */
 package com.github.entercode.entity.player;
 
-import com.github.entercode.action.Action;
-import com.github.entercode.entity.Entity;
-import com.github.entercode.entity.EntityPlayer;
-import com.github.entercode.util.Log;
-import java.awt.Image;
-import java.awt.Point;
+import com.github.entercode.entity.EntityMob;
 
 /**
  *
  * @author entercode
  */
-public class Player extends EntityPlayer {
+public class Player extends EntityMob {
 
-	public Player(int id, String name, double hp, Point pos, int width, int height, int hwidth, int hheight, String texture) {
-		super(id, name, hp, pos, width, height, hwidth, hheight, texture);
+	public Player(int id, String name, double hp, int dir, double speed, int x, int y, int width, int height, int hwidth, int hheight, String texture) {
+		super(id, name, hp, dir, speed, x, y, width, height, hwidth, hheight, texture);
 	}
 
 	@Override
-	public void moveLeft() {
-		this.pos.x -= 10;
+	public void update() {
+		
 	}
-
-	@Override
-	public void moveRight() {
-		this.pos.x += 10;
-	}
-
-	@Override
-	public void moveUp() {
-		this.pos.y -= 10;
-	}
-
-	@Override
-	public void moveDown() {
-		this.pos.y += 10;
-	}
+	
 }

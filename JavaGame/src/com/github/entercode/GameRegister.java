@@ -5,8 +5,9 @@
  */
 package com.github.entercode;
 
+import com.github.entercode.area.Area;
+import com.github.entercode.area.DebugArea;
 import com.github.entercode.entity.Entity;
-import com.github.entercode.entity.player.Player;
 import com.github.entercode.tile.Tile;
 import com.github.entercode.util.Log;
 import java.awt.Point;
@@ -23,7 +24,7 @@ public class GameRegister {
 	public static ArrayList<Tile> TileRegister = new ArrayList<>();
 	
 	// Render Register
-
+	public static Area currentArea = new DebugArea();
 
 	
 	public static void load() {
@@ -35,8 +36,6 @@ public class GameRegister {
 	
 	public static void loadEntity() {
 		Log.info("load Entity");
-		
-		register((Entity)(new Player(0, "Player", 20, new Point(), 16, 24, 16, 24, "resource/texture/entity/player/test.png")));
 		
 	}
 	

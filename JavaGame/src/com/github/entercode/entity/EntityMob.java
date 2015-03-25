@@ -5,17 +5,26 @@
  */
 package com.github.entercode.entity;
 
-import com.github.entercode.action.Action;
-import java.awt.Point;
-
 /**
  *
  * @author entercode
  */
-public abstract class EntityMob extends Entity implements Action {
+public abstract class EntityMob extends Entity {
+	
+	protected double	hp		= 20;
+	protected int		dir		= 0;
+	protected double	speed	= 1;
+	protected double	vx;
+	protected double	vy;
+	protected double	ax;
+	protected double	ay;
+	protected double	gx;
+	protected double	gy;
+	protected boolean	moving	= false;
 
-	public EntityMob(int id, String name, double hp, Point pos, int width, int height, int hwidth, int hheight, String texture) {
-		super(id, name, hp, pos, width, height, hwidth, hheight, texture);
+	public EntityMob(int id, String name, double hp, int dir, double speed, int x, int y, int width, int height, int hwidth, int hheight, String texture) {
+		super(id, name, x, y, width, height, hwidth, hheight, texture);
 	}
+
 	
 }
