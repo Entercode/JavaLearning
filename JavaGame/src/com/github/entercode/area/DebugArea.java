@@ -12,7 +12,7 @@ package com.github.entercode.area;
 public class DebugArea extends Area {
 
 	public DebugArea() {
-		super(0, "debug", 4, 3);
+		super(0, "debug");
 	}
 
 	@Override
